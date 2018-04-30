@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const PORT = process.env.PORT || 9000
 
 let cohorts = [{
     id: 1,
@@ -52,4 +53,4 @@ app.get("/:id", function (request, response) {
     }
 });
 
-app.listen(9000);
+app.listen(PORT);
