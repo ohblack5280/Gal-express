@@ -1,5 +1,5 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 
 let cohorts = [{
     id: 1,
@@ -24,8 +24,8 @@ let cohorts = [{
 }]
 
 function findById(data, id){
-    for(let i = 0; i < data.length; i++){
-        if(data[i].id == id){
+    for (let i = 0; i < data.length; i++){
+        if (data[i].id == id){
             return data[i];
         }
     }
@@ -35,21 +35,21 @@ function findById(data, id){
 const app = express();
 app.use(cors());
 
-app.get("/", function(request , response){
+app.get("/", function (request, response) {
     response.json({data: cohorts});
-})
+});
 
-app.get("/:id", function(request, response){
-    let record = findById(cohorts , request.params.id);
-    if(!record){
-        response.status = 404;
-        response.json({
+app.get("/:id", function (request, response) {
+    var record = findById(cohorts, request.params.id);
+    if (!record){
+        response.status(404).json({
             error: {
                 message: "No record found!"
             }
         });
+    } else {
+        response.json({data: record});
     }
-    response.json({data: record})
 });
 
 app.listen(9000);
